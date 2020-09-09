@@ -1,17 +1,26 @@
 import { NestFactory } from '@nestjs/core';
+import { Transport } from '@nestjs/microservices'
 import { AppModule } from './app.module';
-import * as helmet from 'helmet'
-import * as rateLimit from 'express-rate-limit';
+import { Logger } from '@nestjs/common';
+
+const logger = new Logger('CustomerMicroservice')
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.use(helmet());
-  const rateLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 100,
-    message: "Too many requests sent from this IP Address"
+  const app = await NestFactory.createMicroservice(AppModule, {
+    transport: Transport.RMQ,
+    options: {
+      urls: [
+        `amqp://${process.env.RABBITMQ_DEFAULT_USER}:${process.env.RABBITMQ_DEFAULT_PASS}@localhost:${process.env.RABBITMQ_FIRST_HOST_PORT}/${process.env.RABBITMQ_DEFAULT_VHOST}` 
+      ],
+      queue: 'customer_queue',
+      queueOptions: {
+        durable: false,
+      }
+    }
   });
-  app.use(rateLimiter);
-  await app.listen(3000);
+
+  await app.listen(() => {
+    logger.log('Microservice is listening')
+  });
 }
 bootstrap();
