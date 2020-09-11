@@ -1,17 +1,15 @@
 import { NestFactory } from '@nestjs/core';
+import { Logger } from '@nestjs/common';
 import { AppModule } from './app.module';
-import * as helmet from 'helmet'
-import * as rateLimit from 'express-rate-limit';
+import { customerMicroserviceOptions } from './microservice-connection/microservice-connection';
+
+const logger = new Logger('CustomerMicroservice')
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.use(helmet());
-  const rateLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 100,
-    message: "Too many requests sent from this IP Address"
+  const app = await NestFactory.createMicroservice(AppModule, customerMicroserviceOptions);
+
+  await app.listen(() => {
+    logger.log('Microservice is listening')
   });
-  app.use(rateLimiter);
-  await app.listen(3000);
 }
 bootstrap();
