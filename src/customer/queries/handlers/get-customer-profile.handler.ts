@@ -13,8 +13,8 @@ export class GetCustomerProfileHandler implements IQueryHandler<GetCustomerProfi
         ) {}
 
     async execute(query: GetCustomerProfileQuery) {
-        const { auth_id } = query.getCustomerProfileDto
-        const user = await this.customerRepository.findOne({ auth_id })
+        const authId = query.getCustomerProfileDto;
+        const user = await this.customerRepository.findOne({ where: { auth_id: authId } })
 
         if (!user) {
             throw new RpcException('User does not exist')
