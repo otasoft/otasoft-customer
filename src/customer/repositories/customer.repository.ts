@@ -15,6 +15,7 @@ export class CustomerRepository extends Repository<CustomerEntity> {
 
         try {
             await customer.save()
+            return true;
         } catch(error) {
             throw new RpcException(error);
         }
