@@ -1,17 +1,25 @@
-FROM node:12-alpine as build
+FROM node:12-alpine as dev
 
-WORKDIR /usr/share/otasoft-customer
+WORKDIR /usr/share/microservices/otasoft-customer
 
-ADD dist package.json ./
+COPY package.json ./
 
-RUN yarn install --production
+RUN yarn install
 
-FROM node:12-alpine
+COPY . .
 
-WORKDIR /usr/share/otasoft-customer
+RUN yarn run build
 
-COPY --from=build /usr/share/otasoft-customer .
+# ADD dist package.json ./
 
-EXPOSE 60231
+# RUN yarn install --production
 
-CMD ["node", "main.js"]
+# FROM node:12-alpine
+
+# WORKDIR /usr/share/microservices/otasoft-customer
+
+# COPY --from=build /usr/share/microservices/otasoft-customer/dist ./dist
+
+# EXPOSE 60233
+
+# CMD ["node", "dist/main"]
