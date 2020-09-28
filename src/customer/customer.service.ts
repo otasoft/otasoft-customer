@@ -6,6 +6,8 @@ import { GetCustomerProfileDto } from './dto/get-customer-profile.dto';
 import { CustomerEntity } from './repositories/customer.entity';
 import { GetCustomerProfileQuery } from './queries/impl';
 import { RemoveCustomerProfileDto } from './dto/remove-customer-profile.dto';
+import { UpdateCustomerProfileDto } from './dto/update-customer-profile.dto';
+import { UpdateCustomerProfileCommand } from './commands/impl/update-customer-profile.command';
 
 @Injectable()
 export class CustomerService {
@@ -24,5 +26,9 @@ export class CustomerService {
 
     async removeCustomerProfile(removeCustomerProfileDto: RemoveCustomerProfileDto): Promise<Boolean> {
         return this.commandBus.execute(new RemoveCustomerProfileCommand(removeCustomerProfileDto));
+    }
+
+    async updateCustomerProfile(updateCustomerProfileDto: UpdateCustomerProfileDto): Promise<CustomerEntity> {
+        return this.commandBus.execute(new UpdateCustomerProfileCommand(updateCustomerProfileDto));
     }
 }

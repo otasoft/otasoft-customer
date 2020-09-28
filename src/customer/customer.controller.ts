@@ -5,6 +5,7 @@ import { CreateCustomerProfileDto } from './dto/create-customer-profile.dto';
 import { CustomerEntity } from './repositories/customer.entity';
 import { GetCustomerProfileDto } from './dto/get-customer-profile.dto';
 import { RemoveCustomerProfileDto } from './dto/remove-customer-profile.dto';
+import { UpdateCustomerProfileDto } from './dto/update-customer-profile.dto';
 
 @Controller('customer')
 export class CustomerController {
@@ -26,5 +27,10 @@ export class CustomerController {
     @MessagePattern({ role: 'customer', cmd: 'remove' })
     async removeCustomerProfile(@Body() removeCustomerProfileDto: RemoveCustomerProfileDto): Promise<Boolean> {
         return this.customerService.removeCustomerProfile(removeCustomerProfileDto);
+    }
+
+    @MessagePattern({ role: 'customer', cmd: 'update' })
+    async updateCustomerProfile(@Body() updateCustomerProfileDto: UpdateCustomerProfileDto): Promise<CustomerEntity> {
+        return this.customerService.updateCustomerProfile(updateCustomerProfileDto);
     }
 }
