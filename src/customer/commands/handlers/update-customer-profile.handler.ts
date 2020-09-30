@@ -15,8 +15,6 @@ export class UpdateCustomerProfileHandler implements ICommandHandler<UpdateCusto
         const { id, updateCustomerProfileData } = command.updateCustomerProfileDto;
         const { first_name, last_name } = updateCustomerProfileData;
 
-        const customer = await this.customerRepository.findOne({ where: { id } });
-
         try {
             const updatedCustomer = await this.customerRepository.save({
                 id,
