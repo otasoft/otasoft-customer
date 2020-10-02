@@ -6,9 +6,6 @@ export class CustomerEntity extends BaseEntity {
     id: number;
 
     @Column()
-    auth_id: number;
-
-    @Column()
     first_name: string;
 
     @Column()

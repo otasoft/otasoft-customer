@@ -4,7 +4,6 @@ import { RpcException } from '@nestjs/microservices';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CustomerRepository } from 'src/customer/repositories/customer.repository';
 
-
 @QueryHandler(GetCustomerProfileQuery)
 export class GetCustomerProfileHandler implements IQueryHandler<GetCustomerProfileQuery>{
     constructor(
@@ -13,8 +12,8 @@ export class GetCustomerProfileHandler implements IQueryHandler<GetCustomerProfi
         ) {}
 
     async execute(query: GetCustomerProfileQuery) {
-        const authId = query.getCustomerProfileDto;
-        const user = await this.customerRepository.findOne({ where: { auth_id: authId } })
+        const id = query.getCustomerProfileDto;
+        const user = await this.customerRepository.findOne({ where: { id } })
 
         if (!user) {
             throw new RpcException('User does not exist')
