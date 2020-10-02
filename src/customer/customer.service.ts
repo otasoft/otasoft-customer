@@ -1,13 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { CreateCustomerProfileCommand, RemoveCustomerProfileCommand } from './commands/impl';
+import { CreateCustomerProfileCommand, RemoveCustomerProfileCommand, UpdateCustomerProfileCommand } from './commands/impl';
 import { CreateCustomerProfileDto } from './dto/create-customer-profile.dto';
 import { GetCustomerProfileDto } from './dto/get-customer-profile.dto';
 import { CustomerEntity } from './repositories/customer.entity';
 import { GetCustomerProfileQuery } from './queries/impl';
 import { RemoveCustomerProfileDto } from './dto/remove-customer-profile.dto';
 import { UpdateCustomerProfileDto } from './dto/update-customer-profile.dto';
-import { UpdateCustomerProfileCommand } from './commands/impl/update-customer-profile.command';
 
 @Injectable()
 export class CustomerService {
