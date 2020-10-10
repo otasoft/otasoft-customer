@@ -1,3 +1,3 @@
 export class GetCustomerProfileDto {
-    id: number;
+  id: number;
 }

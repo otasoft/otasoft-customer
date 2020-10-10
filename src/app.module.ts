@@ -4,10 +4,6 @@ import { CustomerModule } from './customer/customer.module';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot(),
-    DbModule,
-    CustomerModule
-  ],
+  imports: [ConfigModule.forRoot(), DbModule, CustomerModule],
 })
 export class AppModule {}
