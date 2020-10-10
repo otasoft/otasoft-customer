@@ -5,20 +5,21 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CustomerRepository } from 'src/customer/repositories/customer.repository';
 
 @QueryHandler(GetCustomerProfileQuery)
-export class GetCustomerProfileHandler implements IQueryHandler<GetCustomerProfileQuery>{
-    constructor(
-        @InjectRepository(CustomerRepository)
-        private readonly customerRepository: CustomerRepository
-        ) {}
+export class GetCustomerProfileHandler
+  implements IQueryHandler<GetCustomerProfileQuery> {
+  constructor(
+    @InjectRepository(CustomerRepository)
+    private readonly customerRepository: CustomerRepository,
+  ) {}
 
-    async execute(query: GetCustomerProfileQuery) {
-        const id = query.getCustomerProfileDto;
-        const user = await this.customerRepository.findOne({ where: { id } })
+  async execute(query: GetCustomerProfileQuery) {
+    const id = query.getCustomerProfileDto;
+    const user = await this.customerRepository.findOne({ where: { id } });
 
-        if (!user) {
-            throw new RpcException('User does not exist')
-        }
-
-        return user;
+    if (!user) {
+      throw new RpcException('User does not exist');
     }
+
+    return user;
+  }
 }

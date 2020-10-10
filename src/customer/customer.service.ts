@@ -1,6 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { CreateCustomerProfileCommand, RemoveCustomerProfileCommand, UpdateCustomerProfileCommand } from './commands/impl';
+import {
+  CreateCustomerProfileCommand,
+  RemoveCustomerProfileCommand,
+  UpdateCustomerProfileCommand,
+} from './commands/impl';
 import { CreateCustomerProfileDto } from './dto/create-customer-profile.dto';
 import { GetCustomerProfileDto } from './dto/get-customer-profile.dto';
 import { CustomerEntity } from './repositories/customer.entity';
@@ -10,24 +14,40 @@ import { UpdateCustomerProfileDto } from './dto/update-customer-profile.dto';
 
 @Injectable()
 export class CustomerService {
-    constructor(
-        private readonly commandBus: CommandBus,
-        private readonly queryBus: QueryBus
-    ) {}
+  constructor(
+    private readonly commandBus: CommandBus,
+    private readonly queryBus: QueryBus,
+  ) {}
 
-    async createCustomerProfile(createCustomerProfileDto: CreateCustomerProfileDto): Promise<CustomerEntity> {
-        return this.commandBus.execute(new CreateCustomerProfileCommand(createCustomerProfileDto));
-    }
+  async createCustomerProfile(
+    createCustomerProfileDto: CreateCustomerProfileDto,
+  ): Promise<CustomerEntity> {
+    return this.commandBus.execute(
+      new CreateCustomerProfileCommand(createCustomerProfileDto),
+    );
+  }
 
-    async getCustomerProfile(getCustomerProfileDto: GetCustomerProfileDto): Promise<CustomerEntity> {
-        return this.queryBus.execute(new GetCustomerProfileQuery(getCustomerProfileDto));
-    }
+  async getCustomerProfile(
+    getCustomerProfileDto: GetCustomerProfileDto,
+  ): Promise<CustomerEntity> {
+    return this.queryBus.execute(
+      new GetCustomerProfileQuery(getCustomerProfileDto),
+    );
+  }
 
-    async removeCustomerProfile(removeCustomerProfileDto: RemoveCustomerProfileDto): Promise<Boolean> {
-        return this.commandBus.execute(new RemoveCustomerProfileCommand(removeCustomerProfileDto));
-    }
+  async removeCustomerProfile(
+    removeCustomerProfileDto: RemoveCustomerProfileDto,
+  ): Promise<Boolean> {
+    return this.commandBus.execute(
+      new RemoveCustomerProfileCommand(removeCustomerProfileDto),
+    );
+  }
 
-    async updateCustomerProfile(updateCustomerProfileDto: UpdateCustomerProfileDto): Promise<CustomerEntity> {
-        return this.commandBus.execute(new UpdateCustomerProfileCommand(updateCustomerProfileDto));
-    }
+  async updateCustomerProfile(
+    updateCustomerProfileDto: UpdateCustomerProfileDto,
+  ): Promise<CustomerEntity> {
+    return this.commandBus.execute(
+      new UpdateCustomerProfileCommand(updateCustomerProfileDto),
+    );
+  }
 }

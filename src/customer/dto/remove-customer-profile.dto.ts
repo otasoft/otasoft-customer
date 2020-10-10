@@ -1,3 +1,3 @@
 export class RemoveCustomerProfileDto {
-    id: number;
+  id: number;
 }

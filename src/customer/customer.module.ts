@@ -12,14 +12,14 @@ import { ConfigService } from '@nestjs/config';
 @Module({
   imports: [
     TypeOrmModule.forFeature([CustomerRepository, CustomerEntity]),
-    CqrsModule
+    CqrsModule,
   ],
   controllers: [CustomerController],
   providers: [
     CustomerService,
     ConfigService,
     ...QueryHandlers,
-    ...CommandHandlers
-  ]
+    ...CommandHandlers,
+  ],
 })
 export class CustomerModule {}
