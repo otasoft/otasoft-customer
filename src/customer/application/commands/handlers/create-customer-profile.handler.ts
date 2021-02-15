@@ -3,8 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { RpcException } from '@nestjs/microservices';
 
 import { CreateCustomerProfileCommand } from '../impl';
-import { CustomerRepository } from '../../../repositories';
-import { CustomerEntity } from '../../../entities';
+import { CustomerRepository } from '../../../infrastructure/repositories';
+import { CustomerEntity } from '../../../infrastructure/entities';
 import { validateDbError } from '../../../../database/helpers';
 
 @CommandHandler(CreateCustomerProfileCommand)

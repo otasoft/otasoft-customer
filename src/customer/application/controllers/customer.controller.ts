@@ -8,7 +8,7 @@ import {
   RemoveCustomerProfileDto,
   UpdateCustomerProfileDto,
 } from '../dto';
-import { CustomerEntity } from '../../entities';
+import { CustomerEntity } from '../../infrastructure/entities';
 
 @Controller('customer')
 export class CustomerController {
