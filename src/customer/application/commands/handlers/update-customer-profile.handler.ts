@@ -2,10 +2,10 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RpcException } from '@nestjs/microservices';
 
-import { CustomerRepository } from '../../repositories';
+import { CustomerRepository } from '../../../repositories';
 import { UpdateCustomerProfileCommand } from '../impl';
-import { CustomerEntity } from '../../entities';
-import { validateDbError } from '../../../database/helpers';
+import { CustomerEntity } from '../../../entities';
+import { validateDbError } from '../../../../database/helpers';
 
 @CommandHandler(UpdateCustomerProfileCommand)
 export class UpdateCustomerProfileHandler

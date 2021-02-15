@@ -3,8 +3,8 @@ import { RpcException } from '@nestjs/microservices';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { GetCustomerProfileQuery } from '../impl';
-import { CustomerRepository } from '../../repositories';
-import { CustomerEntity } from '../../entities';
+import { CustomerRepository } from '../../../repositories';
+import { CustomerEntity } from '../../../entities';
 
 @QueryHandler(GetCustomerProfileQuery)
 export class GetCustomerProfileHandler
