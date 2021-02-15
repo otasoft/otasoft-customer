@@ -1,4 +1,4 @@
-import { GetCustomerProfileDto } from 'src/customer/dto/get-customer-profile.dto';
+import { GetCustomerProfileDto } from '../../dto';
 
 export class GetCustomerProfileQuery {
   constructor(public readonly getCustomerProfileDto: GetCustomerProfileDto) {}

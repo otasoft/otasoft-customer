@@ -1,4 +1,4 @@
-import { RemoveCustomerProfileDto } from 'src/customer/dto/remove-customer-profile.dto';
+import { RemoveCustomerProfileDto } from '../../dto';
 
 export class RemoveCustomerProfileCommand {
   constructor(

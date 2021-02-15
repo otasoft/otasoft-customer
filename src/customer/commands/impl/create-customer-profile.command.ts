@@ -1,4 +1,4 @@
-import { CreateCustomerProfileDto } from 'src/customer/dto/create-customer-profile.dto';
+import { CreateCustomerProfileDto } from '../../dto';
 
 export class CreateCustomerProfileCommand {
   constructor(

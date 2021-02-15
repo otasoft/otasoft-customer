@@ -1,4 +1,4 @@
-import { UpdateCustomerProfileDto } from 'src/customer/dto/update-customer-profile.dto';
+import { UpdateCustomerProfileDto } from '../../dto';
 
 export class UpdateCustomerProfileCommand {
   constructor(
