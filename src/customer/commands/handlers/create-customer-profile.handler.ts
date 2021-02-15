@@ -15,8 +15,12 @@ export class CreateCustomerProfileHandler
     private readonly customerRepository: CustomerRepository,
   ) {}
 
-  async execute(command: CreateCustomerProfileCommand): Promise<CustomerEntity> {
-    const customer = await this.customerRepository.create({ ...command.createCustomerProfileDto });
+  async execute(
+    command: CreateCustomerProfileCommand,
+  ): Promise<CustomerEntity> {
+    const customer = await this.customerRepository.create({
+      ...command.createCustomerProfileDto,
+    });
 
     try {
       await this.customerRepository.save(customer);

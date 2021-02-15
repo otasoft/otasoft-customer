@@ -18,7 +18,11 @@ export class GetCustomerProfileHandler
     const id = query.getCustomerProfileDto;
     const customer = await this.customerRepository.findOne(id);
 
-    if (!customer) throw new RpcException({ statusCode: 404, errorStatus: `Customer with ID: ${id} not found`});
+    if (!customer)
+      throw new RpcException({
+        statusCode: 404,
+        errorStatus: `Customer with ID: ${id} not found`,
+      });
 
     return customer;
   }

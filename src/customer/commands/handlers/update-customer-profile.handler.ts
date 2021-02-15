@@ -15,7 +15,9 @@ export class UpdateCustomerProfileHandler
     private readonly customerRepository: CustomerRepository,
   ) {}
 
-  async execute(command: UpdateCustomerProfileCommand): Promise<CustomerEntity> {
+  async execute(
+    command: UpdateCustomerProfileCommand,
+  ): Promise<CustomerEntity> {
     const { id, updateCustomerProfileData } = command.updateCustomerProfileDto;
     const { first_name, last_name } = updateCustomerProfileData;
 

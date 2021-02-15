@@ -18,7 +18,11 @@ export class RemoveCustomerProfileHandler
     const { id } = command.removeCustomerProfileDto;
     const customer = await this.customerRepository.findOne(id);
 
-    if (!customer) throw new RpcException({ statusCode: 404, errorStatus: `Customer with ID: ${id} not found`});
+    if (!customer)
+      throw new RpcException({
+        statusCode: 404,
+        errorStatus: `Customer with ID: ${id} not found`,
+      });
 
     try {
       await this.customerRepository.remove(customer);

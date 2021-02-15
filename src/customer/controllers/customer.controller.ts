@@ -2,7 +2,12 @@ import { Controller, UsePipes, ValidationPipe, Body } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 
 import { CustomerService } from '../services';
-import { CreateCustomerProfileDto, GetCustomerProfileDto, RemoveCustomerProfileDto, UpdateCustomerProfileDto } from '../dto';
+import {
+  CreateCustomerProfileDto,
+  GetCustomerProfileDto,
+  RemoveCustomerProfileDto,
+  UpdateCustomerProfileDto,
+} from '../dto';
 import { CustomerEntity } from '../entities';
 
 @Controller('customer')

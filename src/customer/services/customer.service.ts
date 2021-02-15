@@ -6,7 +6,12 @@ import {
   RemoveCustomerProfileCommand,
   UpdateCustomerProfileCommand,
 } from '../commands/impl';
-import { CreateCustomerProfileDto, RemoveCustomerProfileDto, GetCustomerProfileDto, UpdateCustomerProfileDto } from '../dto';
+import {
+  CreateCustomerProfileDto,
+  RemoveCustomerProfileDto,
+  GetCustomerProfileDto,
+  UpdateCustomerProfileDto,
+} from '../dto';
 import { CustomerEntity } from '../entities';
 import { GetCustomerProfileQuery } from '../queries/impl';
 

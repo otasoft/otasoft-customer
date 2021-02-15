@@ -6,6 +6,11 @@ import { CustomerModule } from './customer/customer.module';
 import { HealthModule } from './health/health.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), DatabaseModule, CustomerModule, HealthModule],
+  imports: [
+    ConfigModule.forRoot(),
+    DatabaseModule,
+    CustomerModule,
+    HealthModule,
+  ],
 })
 export class AppModule {}
