@@ -1,8 +1,10 @@
 import { QueryHandler, IQueryHandler } from '@nestjs/cqrs';
-import { GetCustomerProfileQuery } from '../impl';
 import { RpcException } from '@nestjs/microservices';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CustomerRepository } from 'src/customer/repositories/customer.repository';
+
+import { GetCustomerProfileQuery } from '../impl';
+import { CustomerRepository } from '../../repositories';
+import { CustomerEntity } from '../../entities';
 
 @QueryHandler(GetCustomerProfileQuery)
 export class GetCustomerProfileHandler
@@ -12,14 +14,12 @@ export class GetCustomerProfileHandler
     private readonly customerRepository: CustomerRepository,
   ) {}
 
-  async execute(query: GetCustomerProfileQuery) {
+  async execute(query: GetCustomerProfileQuery): Promise<CustomerEntity> {
     const id = query.getCustomerProfileDto;
-    const user = await this.customerRepository.findOne({ where: { id } });
+    const customer = await this.customerRepository.findOne(id);
 
-    if (!user) {
-      throw new RpcException('User does not exist');
-    }
+    if (!customer) throw new RpcException({ statusCode: 404, errorStatus: `Customer with ID: ${id} not found`});
 
-    return user;
+    return customer;
   }
 }

@@ -1,8 +1,10 @@
-import { RemoveCustomerProfileCommand } from '../impl';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CustomerRepository } from 'src/customer/repositories/customer.repository';
 import { RpcException } from '@nestjs/microservices';
+
+import { RemoveCustomerProfileCommand } from '../impl';
+import { CustomerRepository } from '../../repositories';
+import { validateDbError } from '../../../database/helpers';
 
 @CommandHandler(RemoveCustomerProfileCommand)
 export class RemoveCustomerProfileHandler
@@ -12,16 +14,21 @@ export class RemoveCustomerProfileHandler
     private readonly customerRepository: CustomerRepository,
   ) {}
 
-  async execute(command: RemoveCustomerProfileCommand) {
-    const id = command.removeCustomerProfileDto;
+  async execute(command: RemoveCustomerProfileCommand): Promise<Boolean> {
+    const { id } = command.removeCustomerProfileDto;
+    const customer = await this.customerRepository.findOne(id);
+
+    if (!customer) throw new RpcException({ statusCode: 404, errorStatus: `Customer with ID: ${id} not found`});
 
     try {
-      const customer = await this.customerRepository.findOne(id);
       await this.customerRepository.remove(customer);
     } catch (error) {
-      throw new RpcException(
-        `Problem occured when removing a customer profile: ${error}`,
-      );
+      const { code, message } = validateDbError(error.code);
+
+      throw new RpcException({
+        statusCode: code,
+        errorStatus: message,
+      });
     }
 
     return true;

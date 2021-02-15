@@ -7,7 +7,7 @@ import { CustomerController } from './customer.controller';
 import { CustomerService } from './customer.service';
 import { QueryHandlers } from './queries/handlers';
 import { CommandHandlers } from './commands/handlers';
-import { CustomerRepository } from './repositories/customer.repository';
+import { CustomerRepository } from './repositories';
 import { CustomerEntity } from './entities';
 
 @Module({

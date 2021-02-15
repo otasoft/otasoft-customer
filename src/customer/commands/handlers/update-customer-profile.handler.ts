@@ -1,8 +1,11 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CustomerRepository } from 'src/customer/repositories/customer.repository';
 import { RpcException } from '@nestjs/microservices';
-import { UpdateCustomerProfileCommand } from '../impl/update-customer-profile.command';
+
+import { CustomerRepository } from '../../repositories';
+import { UpdateCustomerProfileCommand } from '../impl';
+import { CustomerEntity } from '../../entities';
+import { validateDbError } from '../../../database/helpers';
 
 @CommandHandler(UpdateCustomerProfileCommand)
 export class UpdateCustomerProfileHandler
@@ -12,7 +15,7 @@ export class UpdateCustomerProfileHandler
     private readonly customerRepository: CustomerRepository,
   ) {}
 
-  async execute(command: UpdateCustomerProfileCommand) {
+  async execute(command: UpdateCustomerProfileCommand): Promise<CustomerEntity> {
     const { id, updateCustomerProfileData } = command.updateCustomerProfileDto;
     const { first_name, last_name } = updateCustomerProfileData;
 
@@ -22,9 +25,15 @@ export class UpdateCustomerProfileHandler
         first_name,
         last_name,
       });
+
       return updatedCustomer;
     } catch (error) {
-      throw new RpcException(error);
+      const { code, message } = validateDbError(error.code);
+
+      throw new RpcException({
+        statusCode: code,
+        errorStatus: message,
+      });
     }
   }
 }
