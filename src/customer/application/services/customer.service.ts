@@ -12,7 +12,7 @@ import {
   GetCustomerProfileDto,
   UpdateCustomerProfileDto,
 } from '../dto';
-import { CustomerEntity } from '../../infrastructure/entities';
+import { CustomerEntity } from '@infrastructure/entities';
 import { GetCustomerProfileQuery } from '../queries/impl';
 
 @Injectable()

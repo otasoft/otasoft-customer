@@ -2,9 +2,9 @@ import { QueryHandler, IQueryHandler } from '@nestjs/cqrs';
 import { RpcException } from '@nestjs/microservices';
 import { InjectRepository } from '@nestjs/typeorm';
 
+import { CustomerRepository } from '@infrastructure/repositories';
+import { CustomerEntity } from '@infrastructure/entities';
 import { GetCustomerProfileQuery } from '../impl';
-import { CustomerRepository } from '../../../infrastructure/repositories';
-import { CustomerEntity } from '../../../infrastructure/entities';
 
 @QueryHandler(GetCustomerProfileQuery)
 export class GetCustomerProfileHandler

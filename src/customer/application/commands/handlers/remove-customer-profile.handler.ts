@@ -2,9 +2,9 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RpcException } from '@nestjs/microservices';
 
+import { validateDbError } from '@database/helpers';
+import { CustomerRepository } from '@infrastructure/repositories';
 import { RemoveCustomerProfileCommand } from '../impl';
-import { CustomerRepository } from '../../../infrastructure/repositories';
-import { validateDbError } from '../../../../database/helpers';
 
 @CommandHandler(RemoveCustomerProfileCommand)
 export class RemoveCustomerProfileHandler
