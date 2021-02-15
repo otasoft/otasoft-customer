@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
+import { CqrsModule } from '@nestjs/cqrs';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigService } from '@nestjs/config';
+
 import { CustomerController } from './customer.controller';
 import { CustomerService } from './customer.service';
 import { QueryHandlers } from './queries/handlers';
 import { CommandHandlers } from './commands/handlers';
-import { CqrsModule } from '@nestjs/cqrs';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { CustomerRepository } from './repositories/customer.repository';
-import { CustomerEntity } from './repositories/customer.entity';
-import { ConfigService } from '@nestjs/config';
+import { CustomerEntity } from './entities';
 
 @Module({
   imports: [
