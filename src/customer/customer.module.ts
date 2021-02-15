@@ -3,8 +3,8 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
 
-import { CustomerController } from './customer.controller';
-import { CustomerService } from './customer.service';
+import { CustomerController } from './controllers';
+import { CustomerService } from './services';
 import { QueryHandlers } from './queries/handlers';
 import { CommandHandlers } from './commands/handlers';
 import { CustomerRepository } from './repositories';

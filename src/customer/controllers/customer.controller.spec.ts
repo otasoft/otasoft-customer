@@ -2,7 +2,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { CustomerController } from './customer.controller';
-import { CustomerService } from './customer.service';
+import { CustomerService } from '../services';
 
 describe('CustomerController', () => {
   let controller: CustomerController;

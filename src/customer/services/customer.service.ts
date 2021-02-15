@@ -5,13 +5,13 @@ import {
   CreateCustomerProfileCommand,
   RemoveCustomerProfileCommand,
   UpdateCustomerProfileCommand,
-} from './commands/impl';
-import { CreateCustomerProfileDto } from './dto/create-customer-profile.dto';
-import { GetCustomerProfileDto } from './dto/get-customer-profile.dto';
-import { CustomerEntity } from './entities';
-import { GetCustomerProfileQuery } from './queries/impl';
-import { RemoveCustomerProfileDto } from './dto/remove-customer-profile.dto';
-import { UpdateCustomerProfileDto } from './dto/update-customer-profile.dto';
+} from '../commands/impl';
+import { CreateCustomerProfileDto } from '../dto/create-customer-profile.dto';
+import { GetCustomerProfileDto } from '../dto/get-customer-profile.dto';
+import { CustomerEntity } from '../entities';
+import { GetCustomerProfileQuery } from '../queries/impl';
+import { RemoveCustomerProfileDto } from '../dto/remove-customer-profile.dto';
+import { UpdateCustomerProfileDto } from '../dto/update-customer-profile.dto';
 
 @Injectable()
 export class CustomerService {
