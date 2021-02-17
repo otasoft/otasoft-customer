@@ -3,6 +3,7 @@ import { CommandBus, QueryBus } from '@nestjs/cqrs';
 
 import {
   CreateCustomerProfileCommand,
+  DeleteMessageCommand,
   RemoveCustomerProfileCommand,
   UpdateCustomerProfileCommand,
 } from '../commands/impl';
@@ -12,8 +13,9 @@ import {
   GetCustomerProfileDto,
   UpdateCustomerProfileDto,
 } from '../dto';
-import { CustomerEntity } from '@infrastructure/entities';
-import { GetCustomerProfileQuery } from '../queries/impl';
+import { CustomerEntity, MessageEntity } from '@infrastructure/entities';
+import { GetCustomerMessagesQuery, GetCustomerProfileQuery } from '../queries/impl';
+import { TextResponseModel } from '@application/models';
 
 @Injectable()
 export class CustomerService {
@@ -28,6 +30,14 @@ export class CustomerService {
     return this.commandBus.execute(
       new CreateCustomerProfileCommand(createCustomerProfileDto),
     );
+  }
+
+  async getCustomerMessages(id: number): Promise<MessageEntity[]> {
+    return this.queryBus.execute(new GetCustomerMessagesQuery(id));
+  }
+
+  async deleteMessage(id: number): Promise<TextResponseModel> {
+    return this.commandBus.execute(new DeleteMessageCommand(id));
   }
 
   async getCustomerProfile(
