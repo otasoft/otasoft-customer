@@ -8,7 +8,8 @@ import {
   RemoveCustomerProfileDto,
   UpdateCustomerProfileDto,
 } from '../dto';
-import { CustomerEntity } from '@infrastructure/entities';
+import { CustomerEntity, MessageEntity } from '@infrastructure/entities';
+import { TextResponseModel } from '@application/models';
 
 @Controller('customer')
 export class CustomerController {
@@ -20,6 +21,16 @@ export class CustomerController {
     @Body() createCustomerProfileDto: CreateCustomerProfileDto,
   ): Promise<CustomerEntity> {
     return this.customerService.createCustomerProfile(createCustomerProfileDto);
+  }
+
+  @MessagePattern({ role: 'customer', cmd: 'getCustomerMessages' })
+  async getCustomerMessages(id: number): Promise<MessageEntity[]> {
+    return this.customerService.getCustomerMessages(id);
+  }
+
+  @MessagePattern({ role: 'customer', cmd: 'deleteMessage' })
+  async deleteMessage(id: number): Promise<TextResponseModel> {
+    return this.customerService.deleteMessage(id);
   }
 
   @MessagePattern({ role: 'customer', cmd: 'get' })
