@@ -10,6 +10,14 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
-    "incremental": true
+    "incremental": true,
+    "moduleResolution": "node",
+    "paths": {
+      "@infrastructure/*": ["src/customer/infrastructure/*"],
+      "@domain/*": ["src/customer/domain/*"],
+      "@application/*": ["src/customer/application/*"],
+      "@database/*": ["src/database/*"],
+      "@test/*": ["test/*"]
+    }
   }
 }

@@ -1,25 +1,14 @@
 import { Module } from '@nestjs/common';
-import { CustomerController } from './customer.controller';
-import { CustomerService } from './customer.service';
-import { QueryHandlers } from './queries/handlers';
-import { CommandHandlers } from './commands/handlers';
-import { CqrsModule } from '@nestjs/cqrs';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { CustomerRepository } from './repositories/customer.repository';
-import { CustomerEntity } from './repositories/customer.entity';
-import { ConfigService } from '@nestjs/config';
+
+import { ApplicationModule } from './application/application.module';
+import { DomainModule } from './domain/domain.module';
+import { InfrastructureModule } from './infrastructure/infrastructure.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([CustomerRepository, CustomerEntity]),
-    CqrsModule,
-  ],
-  controllers: [CustomerController],
-  providers: [
-    CustomerService,
-    ConfigService,
-    ...QueryHandlers,
-    ...CommandHandlers,
+    ApplicationModule,
+    DomainModule,
+    InfrastructureModule,
   ],
 })
 export class CustomerModule {}

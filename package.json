@@ -1,6 +1,6 @@
 {
   "name": "otasoft-customer",
-  "version": "0.0.1",
+  "version": "0.1.4",
   "description": "",
   "author": "",
   "private": true,
@@ -27,11 +27,14 @@
     "@nestjs/cqrs": "^7.0.1",
     "@nestjs/microservices": "^7.6.5",
     "@nestjs/platform-express": "^7.6.2",
+    "@nestjs/schedule": "^0.4.2",
+    "@nestjs/terminus": "^7.1.0",
     "@nestjs/typeorm": "^7.1.5",
     "amqp-connection-manager": "^3.2.1",
     "amqplib": "^0.6.0",
     "class-transformer": "^0.3.2",
     "class-validator": "^0.13.0",
+    "module-alias": "^2.2.2",
     "pg": "^8.4.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
@@ -72,6 +75,19 @@
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "@infrastructure/(.*)": "<rootDir>/customer/infrastructure/$1",
+      "@domain/(.*)": "<rootDir>/customer/domain/$1",
+      "@application/(.*)": "<rootDir>/customer/application/$1",
+      "@database/(.*)": "<rootDir>/database/$1",
+      "@test/(.*)": "<rootDir>/../test/$1"
+    },
+    "_moduleAliases": {
+      "@infrastructure": "dist/customer/infrastructure",
+      "@domain": "dist/customer/domain",
+      "@application": "dist/customer/application",
+      "@database": "dist/database"
+    }
   }
 }
