@@ -32,7 +32,7 @@
     "@nestjs/typeorm": "^7.1.5",
     "amqp-connection-manager": "^3.2.1",
     "amqplib": "^0.6.0",
-    "class-transformer": "^0.3.2",
+    "class-transformer": "^0.4.0",
     "class-validator": "^0.13.0",
     "module-alias": "^2.2.2",
     "pg": "^8.4.2",
